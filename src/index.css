@@ -10,3 +10,46 @@ body, html {
   height: 100%;
   width: 100%;
 }
+
+:root {
+  --brand-blue: #0041FF;
+  --brand-orange: #FE5103;
+  --brand-yellow: #FECE00;
+
+  --bg: #ffffff;
+  --text: #0b1220;
+  --muted: #6b7280;
+
+  --shadow: 0 12px 28px rgba(0,0,0,0.08);
+}
+
+/* Helpful utility classes using the brand colors for non-Tailwind places */
+.brand-bg { background-color: var(--brand-blue); }
+.brand-accent { background-color: var(--brand-orange); }
+.brand-highlight { color: var(--brand-yellow); }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Subtle floating animation for premium feel */
+@keyframes floaty {
+  0% { transform: translateY(0) translateX(0) scale(1); }
+  50% { transform: translateY(-6px) translateX(2px) scale(1.01); }
+  100% { transform: translateY(0) translateX(0) scale(1); }
+}
+
+.floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
+
+/* Gradient blob used for decorative accents */
+.brand-blob {
+  position: absolute;
+  filter: blur(56px) saturate(120%);
+  opacity: 0.65;
+  pointer-events: none;
+}

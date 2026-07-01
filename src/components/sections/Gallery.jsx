@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { FaTimes, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
@@ -104,6 +104,25 @@ const Gallery = () => {
   const prevImage = () => setLightboxIndex((i) => (i - 1 + images.length) % images.length);
   const nextImage = () => setLightboxIndex((i) => (i + 1) % images.length);
 
+  // Keyboard navigation + preload when lightbox is open
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+
+    const onKey = (e) => {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'ArrowRight') nextImage();
+    };
+
+    // Preload neighbors
+    const preload = (src) => { const i = new Image(); i.src = src; };
+    preload(images[(lightboxIndex + 1) % images.length].src);
+    preload(images[(lightboxIndex - 1 + images.length) % images.length].src);
+
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [lightboxIndex]);
+
   return (
     <>
       <section className="w-full bg-white py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -152,6 +171,8 @@ const Gallery = () => {
                 }}
                 onClick={() => openLightbox(i)}
                 className="group relative cursor-pointer overflow-hidden rounded-2xl shadow-md"
+                whileHover={{ scale: 1.02 }}
+                layout
                 style={{ aspectRatio: "3/4" }}
               >
                 <img
@@ -161,11 +182,15 @@ const Gallery = () => {
                 />
 
                 {/* Hover overlay */}
-                <div className="absolute inset-0 bg-linear-to-t from-[#0041FF]/70 via-transparent to-transparent opacity-0 transition-opacity duration-400 group-hover:opacity-100" />
+                <div
+                  className="absolute inset-0 opacity-0 transition-opacity duration-400 group-hover:opacity-100"
+                  style={{ background: 'linear-gradient(to top, rgba(0,65,255,0.72), rgba(0,65,255,0.14) 30%, transparent 60%)' }}
+                />
 
                 {/* Label */}
                 <motion.span
-                  className="absolute bottom-4 left-4 rounded-full bg-white/90 px-3 py-1 text-[11px] font-black uppercase tracking-[0.15em] text-[#0041FF] opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 translate-y-2"
+                  className="absolute bottom-4 left-4 rounded-full bg-white/90 px-3 py-1 text-[11px] font-black uppercase tracking-[0.15em] opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 translate-y-2"
+                  style={{ color: 'var(--brand-blue)' }}
                 >
                   {img.label}
                 </motion.span>
@@ -187,6 +212,8 @@ const Gallery = () => {
                 }}
                 onClick={() => openLightbox(i + 4)}
                 className="group relative cursor-pointer overflow-hidden rounded-2xl shadow-md"
+                whileHover={{ scale: 1.02 }}
+                layout
                 style={{ aspectRatio: "16/7" }}
               >
                 <img
@@ -194,7 +221,10 @@ const Gallery = () => {
                   alt={img.alt}
                   className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-[#0041FF]/70 via-transparent to-transparent opacity-0 transition-opacity duration-400 group-hover:opacity-100" />
+                <div
+                  className="absolute inset-0 opacity-0 transition-opacity duration-400 group-hover:opacity-100"
+                  style={{ background: 'linear-gradient(to top, rgba(0,65,255,0.72), rgba(0,65,255,0.14) 30%, transparent 60%)' }}
+                />
                 <motion.span className="absolute bottom-4 left-4 rounded-full bg-white/90 px-3 py-1 text-[11px] font-black uppercase tracking-[0.15em] text-[#0041FF] opacity-0 transition-all duration-300 group-hover:opacity-100">
                   {img.label}
                 </motion.span>

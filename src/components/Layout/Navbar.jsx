@@ -111,8 +111,8 @@ const Navbar = () => {
             />
 
             <div className="flex flex-col items-center justify-center text-base font-bold uppercase italic leading-4 tracking-wide text-white sm:text-xl">
-              <span className="text-[#FE5103]">urban</span>
-              <span className="text-[#FECE00]">yatra</span>
+              <span style={{ color: 'var(--brand-orange)' }}>urban</span>
+              <span style={{ color: 'var(--brand-yellow)' }}>yatra</span>
             </div>
           </Link>
 
@@ -142,7 +142,11 @@ const Navbar = () => {
             <Link
               to="/contact"
               onClick={closeMenu}
-              className="hidden h-[72px] w-[72px] items-center justify-center rounded-full bg-[#FE5103] text-sm font-semibold uppercase text-white shadow-[0_0_22px_rgba(254,81,3,0.45)] transition-all duration-300 hover:bg-white hover:text-[#FE5103] lg:inline-flex"
+              className="hidden h-[72px] w-[72px] items-center justify-center rounded-full text-sm font-semibold uppercase text-white transition-all duration-300 lg:inline-flex"
+              style={{
+                backgroundColor: 'var(--brand-orange)',
+                boxShadow: '0 0 22px rgba(254,81,3,0.45)'
+              }}
             >
               Book
             </Link>
@@ -191,7 +195,7 @@ const Navbar = () => {
         </div>
 
         {/* Right Content Side */}
-        <div className="relative flex min-h-screen flex-col justify-center bg-[#0041FF] px-7 py-28 md:px-16 lg:px-20">
+        <div className="relative flex min-h-screen flex-col justify-center px-7 py-28 md:px-16 lg:px-20" style={{ backgroundColor: 'var(--brand-blue)' }}>
           <motion.div
             initial={{ opacity: 0, x: 28 }}
             animate={{ opacity: 1, x: 0 }}
@@ -205,7 +209,8 @@ const Navbar = () => {
                   <Link
                     to={link.path}
                     onClick={closeMenu}
-                    className="block text-xl uppercase tracking-wide text-[#FECE00] transition-colors duration-300 hover:text-[#FE5103]"
+                    className="block text-xl uppercase tracking-wide transition-colors duration-300 hover:text-[#FE5103]"
+                    style={{ color: 'var(--brand-yellow)' }}
                   >
                     {link.name}
                   </Link>

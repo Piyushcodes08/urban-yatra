@@ -50,18 +50,18 @@ const iconMap = {
 };
 
 const gradientMap = {
-  'domestic-tours': 'from-blue-600 to-indigo-700',
-  'temple-pilgrimage': 'from-orange-500 to-red-600',
-  'family-tours': 'from-yellow-400 to-orange-500',
-  'couple-honeymoon': 'from-pink-500 to-rose-600',
-  'group-tours': 'from-emerald-500 to-teal-700',
-  'cab-service': 'from-slate-700 to-slate-900',
-  'airport-transfers': 'from-cyan-500 to-blue-600',
-  'flight-booking': 'from-blue-400 to-indigo-500',
-  'customized-planning': 'from-purple-600 to-indigo-800',
-  'personal-car': 'from-amber-600 to-orange-700',
-  'photographer-arrangement': 'from-violet-500 to-fuchsia-600',
-  'travel-reel': 'from-brand-orange to-red-500',
+  'domestic-tours': 'linear-gradient(135deg, rgba(0,65,255,0.85) 0%, rgba(87,75,255,0.6) 100%)',
+  'temple-pilgrimage': 'linear-gradient(135deg, rgba(254,81,3,0.9) 0%, rgba(255,94,53,0.65) 100%)',
+  'family-tours': 'linear-gradient(135deg, rgba(254,206,0,0.9) 0%, rgba(254,134,0,0.6) 100%)',
+  'couple-honeymoon': 'linear-gradient(135deg, rgba(255,128,200,0.9) 0%, rgba(255,80,180,0.65) 100%)',
+  'group-tours': 'linear-gradient(135deg, rgba(16,185,129,0.9) 0%, rgba(20,184,166,0.65) 100%)',
+  'cab-service': 'linear-gradient(135deg, rgba(55,65,81,0.9) 0%, rgba(30,41,59,0.6) 100%)',
+  'airport-transfers': 'linear-gradient(135deg, rgba(6,182,212,0.9) 0%, rgba(59,130,246,0.6) 100%)',
+  'flight-booking': 'linear-gradient(135deg, rgba(59,130,246,0.9) 0%, rgba(79,70,229,0.65) 100%)',
+  'customized-planning': 'linear-gradient(135deg, rgba(124,58,237,0.9) 0%, rgba(79,70,229,0.65) 100%)',
+  'personal-car': 'linear-gradient(135deg, rgba(245,158,11,0.9) 0%, rgba(249,115,22,0.6) 100%)',
+  'photographer-arrangement': 'linear-gradient(135deg, rgba(139,92,246,0.9) 0%, rgba(236,72,153,0.6) 100%)',
+  'travel-reel': 'linear-gradient(135deg, rgba(254,81,3,0.95) 0%, rgba(239,68,68,0.6) 100%)',
 };
 
 // ==========================================
@@ -82,27 +82,23 @@ export const ServiceCard = ({
     switch (cat) {
       case 'tours':
         return {
-          bg: 'bg-brand-blue/5 text-brand-blue border-brand-blue/10',
-          accent: 'bg-brand-blue',
-          ring: 'focus:ring-brand-blue',
+          bgStyle: { backgroundColor: 'rgba(0,65,255,0.06)', color: 'var(--brand-blue)', borderColor: 'rgba(0,65,255,0.08)' },
+          accentStyle: { backgroundColor: 'var(--brand-blue)' },
         };
       case 'transport':
         return {
-          bg: 'bg-brand-orange/5 text-brand-orange border-brand-orange/10',
-          accent: 'bg-brand-orange',
-          ring: 'focus:ring-brand-orange',
+          bgStyle: { backgroundColor: 'rgba(254,81,3,0.06)', color: 'var(--brand-orange)', borderColor: 'rgba(254,81,3,0.08)' },
+          accentStyle: { backgroundColor: 'var(--brand-orange)' },
         };
       case 'media-planning':
         return {
-          bg: 'bg-brand-yellow/10 text-brand-orange-dark border-brand-yellow/30',
-          accent: 'bg-brand-yellow text-slate-900',
-          ring: 'focus:ring-brand-yellow',
+          bgStyle: { backgroundColor: 'rgba(254,206,0,0.08)', color: 'var(--brand-orange)', borderColor: 'rgba(254,206,0,0.12)' },
+          accentStyle: { backgroundColor: 'var(--brand-yellow)', color: '#0b1220' },
         };
       default:
         return {
-          bg: 'bg-slate-100 text-slate-700 border-slate-200',
-          accent: 'bg-slate-700',
-          ring: 'focus:ring-slate-700',
+          bgStyle: { backgroundColor: '#f8fafc', color: '#334155', borderColor: '#e6edf3' },
+          accentStyle: { backgroundColor: '#334155' },
         };
     }
   };
@@ -122,32 +118,35 @@ export const ServiceCard = ({
           : 'border-slate-100 hover:border-slate-200'
       }`}
     >
-      <div className="relative h-44 w-full overflow-hidden bg-slate-100">
+        <div className="relative h-44 w-full overflow-hidden bg-slate-100">
         <img
           src={service.image}
           alt={service.title}
           referrerPolicy="no-referrer"
           className="h-full w-full object-cover transition-transform duration-700 cubic-bezier(0.16, 1, 0.3, 1) group-hover:scale-110"
         />
-        <div className={`absolute inset-0 bg-gradient-to-br ${gradientClass} mix-blend-multiply opacity-15 transition-opacity duration-300 group-hover:opacity-30`} />
+        <div
+          className="absolute inset-0 mix-blend-multiply opacity-15 transition-opacity duration-300 group-hover:opacity-30"
+          style={{ background: gradientMap[service.id] || 'linear-gradient(135deg, rgba(0,65,255,0.85), rgba(0,65,255,0.6))' }}
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent" />
 
         <div className="absolute top-4 left-4 flex flex-col gap-2 items-start">
-          <span className={`rounded-full border px-3 py-1 text-xs font-semibold tracking-wide shadow-sm backdrop-blur-md ${styles.bg}`}>
+          <span className="rounded-full border px-3 py-1 text-xs font-semibold tracking-wide shadow-sm backdrop-blur-md" style={styles.bgStyle}>
             {service.categoryLabel}
           </span>
           {service.badgeText && (
-            <span className="rounded-full bg-brand-orange px-2.5 py-0.5 text-[10px] font-bold tracking-wider text-white uppercase shadow-sm">
+            <span className="rounded-full px-2.5 py-0.5 text-[10px] font-bold tracking-wider text-white uppercase shadow-sm" style={{ backgroundColor: 'var(--brand-orange)' }}>
               {service.badgeText}
             </span>
           )}
         </div>
 
-        <div className="absolute bottom-4 right-4 rounded-lg bg-slate-950/70 px-3 py-1.5 text-xs font-bold text-white backdrop-blur-md">
+        <div className="absolute bottom-4 right-4 rounded-lg px-3 py-1.5 text-xs font-bold text-white backdrop-blur-md" style={{ backgroundColor: 'rgba(2,6,23,0.6)' }}>
           {service.startingPrice}
         </div>
 
-        <div className={`absolute bottom-4 left-4 flex h-10 w-10 items-center justify-center rounded-xl text-white shadow-lg backdrop-blur-sm transition-all duration-300 group-hover:scale-105 ${styles.accent}`}>
+        <div className="absolute bottom-4 left-4 flex h-10 w-10 items-center justify-center rounded-xl text-white shadow-lg backdrop-blur-sm transition-all duration-300 group-hover:scale-105" style={styles.accentStyle}>
           <IconComponent className="h-5 w-5" />
         </div>
       </div>

@@ -30,6 +30,10 @@ const About = () => {
     <section ref={sectionRef} className="relative h-[200vh] w-full py-24">
       <div className="sticky top-0 h-screen w-full overflow-hidden text-white">
 
+        {/* decorative floating blobs */}
+        <div className="brand-blob floaty" style={{ width: 360, height: 360, left: -80, top: 40, background: 'radial-gradient(circle at 30% 30%, rgba(254,81,3,0.9), rgba(254,206,0,0.15))' }} />
+        <div className="brand-blob floaty" style={{ width: 420, height: 420, right: -120, bottom: 40, background: 'radial-gradient(circle at 70% 70%, rgba(0,65,255,0.9), rgba(254,206,0,0.08))' }} />
+
         {/* ── LEFT IMAGE ── */}
         <div className="absolute left-0 top-0 z-0 hidden h-full w-1/2 overflow-hidden lg:block">
           <img
@@ -57,8 +61,8 @@ const About = () => {
 
               {/* ── Heading ── */}
               <h2 className="text-[42px] font-black uppercase leading-none tracking-[-0.03em] text-slate-900 md:text-[58px]">
-                <span className="text-[#0041FF]">About </span>
-                <span className="text-[#FE5103]">Us</span>
+                <span style={{ color: 'var(--brand-blue)' }}>About </span>
+                <span style={{ color: 'var(--brand-orange)' }}>Us</span>
               </h2>
 
               {/* ── Decorative rule ── */}
@@ -168,8 +172,8 @@ const About = () => {
           <div className="px-6 py-10">
             {/* Heading */}
             <h2 className="text-5xl font-black uppercase leading-tight">
-              <span className="text-[#0041FF]">About </span>
-              <span className="text-[#FE5103]">Us</span>
+              <span style={{ color: 'var(--brand-blue)' }}>About </span>
+              <span style={{ color: 'var(--brand-orange)' }}>Us</span>
             </h2>
 
             <div className="mt-3 flex items-center gap-2">

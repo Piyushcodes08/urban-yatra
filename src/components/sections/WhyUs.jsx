@@ -15,7 +15,7 @@ const WhyUs = () => {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="w-full bg-[#0041FF] py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section className="w-full py-20 px-4 sm:px-6 lg:px-8 overflow-hidden" style={{ backgroundColor: 'var(--brand-blue)' }}>
       <div
         ref={ref}
         className="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
@@ -28,7 +28,8 @@ const WhyUs = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-4 text-[11px] font-black uppercase tracking-[0.35em] text-[#FE5103]"
+            className="mb-4 text-[11px] font-black uppercase tracking-[0.35em]"
+            style={{ color: 'var(--brand-orange)' }}
           >
             The Urban Yatra Difference
           </motion.p>
@@ -38,9 +39,10 @@ const WhyUs = () => {
             initial={{ opacity: 0, y: 28 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[38px] font-black leading-[1.05] tracking-[-0.02em] text-white md:text-[52px]"
+            className="text-[38px] font-black leading-[1.05] tracking-[-0.02em] md:text-[52px]"
+            style={{ color: 'white' }}
           >
-            Why Travel <span className="text-[#FECE00]">With Us?</span>
+            Why Travel <span style={{ color: 'var(--brand-yellow)' }}>With Us?</span>
           </motion.h2>
 
           {/* Sub */}
@@ -48,7 +50,8 @@ const WhyUs = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-5 max-w-md text-[14px] font-medium leading-[1.85] text-white/65"
+            className="mt-5 max-w-md text-[14px] font-medium leading-[1.85]"
+            style={{ color: 'rgba(255,255,255,0.88)' }}
           >
             We believe true luxury lies in personalization and peace of mind.
             Here's what sets us apart from conventional travel agencies.
@@ -69,7 +72,7 @@ const WhyUs = () => {
                 className="flex items-start gap-4"
               >
                 {/* Orange chevron bullet */}
-                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FE5103] text-white shadow-md shadow-[#FE5103]/40">
+                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-white shadow-md" style={{ backgroundColor: 'var(--brand-orange)', boxShadow: '0 8px 20px rgba(254,81,3,0.28)' }}>
                   <FaChevronRight className="text-[9px]" />
                 </span>
                 <span className="text-[14px] font-semibold leading-[1.7] text-white">
@@ -83,12 +86,16 @@ const WhyUs = () => {
         {/* ── RIGHT — Two staggered images ── */}
         <div className="relative flex justify-center items-center h-85 sm:h-100 lg:h-105 overflow-hidden">
 
+          {/* subtle decorative blob */}
+          <div className="brand-blob floaty" style={{ width: 220, height: 220, right: 40, top: 10, background: 'radial-gradient(circle at 30% 30%, rgba(254,206,0,0.9), rgba(254,81,3,0.08))' }} />
+
           {/* Back image — Rajasthan palace */}
           <motion.div
             initial={{ opacity: 0, y: 30, rotate: 2 }}
             animate={inView ? { opacity: 1, y: 0, rotate: 2 } : {}}
             transition={{ duration: 0.75, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className="absolute left-0 top-6 h-65 w-[52%] sm:h-75 sm:w-[48%] overflow-hidden rounded-2xl shadow-2xl"
+            whileHover={{ y: -6, scale: 1.02 }}
           >
             <img
               src="https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=700&q=80"
@@ -104,6 +111,7 @@ const WhyUs = () => {
             animate={inView ? { opacity: 1, y: 0, rotate: 2 } : {}}
             transition={{ duration: 0.75, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="absolute right-0 bottom-0 h-60 w-[52%] sm:h-70 sm:w-[48%] overflow-hidden rounded-2xl"
+            whileHover={{ y: -6, scale: 1.02 }}
           >
             <img
               src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=700&q=80"
